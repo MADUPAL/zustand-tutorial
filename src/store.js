@@ -1,5 +1,5 @@
 import { create } from "zustand";
-
+import { devtools } from "zustand/middleware";
 //state setter for whole store
 const store = (set) => ({
   tasks: [{ title: "TestTask", state: "ONGOING" }],
@@ -7,9 +7,13 @@ const store = (set) => ({
   draggedTask: null,
 
   addTask: (title, state) =>
-    set((store) => ({
-      tasks: [...store.tasks, { title, state }],
-    })),
+    set(
+      (store) => ({
+        tasks: [...store.tasks, { title, state }],
+      }),
+      false,
+      "addTask"
+    ),
   deleteTask: (title) =>
     set((store) => ({
       tasks: store.tasks.filter((task) => task.title !== title),
