@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 //state setter for whole store
 const store = (set) => ({
   tasks: [{ title: "TestTask", state: "ONGOING" }],
@@ -28,4 +28,4 @@ const store = (set) => ({
     })),
 });
 
-export const useStore = create(store);
+export const useStore = create(devtools(store));
